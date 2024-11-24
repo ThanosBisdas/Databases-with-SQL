@@ -1,0 +1,57 @@
+CREATE DATABASE loan;
+
+use loan;
+CREATE TABLE customer(
+customer_id MEDIUMINT NOT NULL AUTO_INCREMENT,
+first_name VARCHAR(40) NOT NULL,
+last_name VARCHAR(40) NOT NULL,
+age TINYINT UNSIGNED,
+city VARCHAR (40) NOT NULL,
+PRIMARY KEY (customer_id)
+);
+
+
+use loan;
+INSERT INTO customer VALUES (NULL,"Georgios","Pappas",25,"Athens");
+INSERT INTO customer VALUES (NULL,"Ioannis","Christou",32,"Athens");
+INSERT INTO customer VALUES (NULL,"Maria","Ioannou",41,"Patras");
+INSERT INTO customer VALUES (NULL,"Panagiota","Antoniou",33,"Thessaloniki");
+INSERT INTO customer VALUES (NULL,"Chris","Papadopoulos",49,"Athens");
+INSERT INTO customer VALUES (NULL,"Dimitrios","Georgiou",51,"Heraklion");
+INSERT INTO customer VALUES (NULL,"Anna","Mela",44,"Thessaloniki");
+INSERT INTO customer VALUES (NULL,"Myrto","Vasiliou",29,"Volos");
+INSERT INTO customer VALUES (NULL,"Ioanna","Charalampidou",57,"Patras");
+INSERT INTO customer VALUES (NULL,"Vaggelis","Kalchas",39,"Athens");
+
+use loan;
+CREATE TABLE  installment(
+installment_id MEDIUMINT NOT NULL AUTO_INCREMENT,
+monthly_installment FLOAT(5,2) NOT NULL,
+first_installment DATE,
+customer_id MEDIUMINT REFERENCES customer(customer_id),
+first_name VARCHAR(40) REFERENCES customer(first_name),
+last_name VARCHAR(40) REFERENCES customer(last_name),
+PRIMARY KEY (installment_id)
+);
+
+INSERT INTO loan.installment  (installment_id , monthly_installment , first_installment, customer_id)VALUES (NULL,111.01,CURRENT_DATE,1) ;
+INSERT INTO loan.installment  (installment_id , monthly_installment , first_installment, customer_id)VALUES (NULL,98.14,CURRENT_DATE,4) ;
+INSERT INTO loan.installment  (installment_id , monthly_installment , first_installment, customer_id)VALUES (NULL,233.68,CURRENT_DATE,7) ;
+INSERT INTO loan.installment  (installment_id , monthly_installment , first_installment, customer_id)VALUES (NULL,122.47,CURRENT_DATE,3) ;
+INSERT INTO loan.installment  (installment_id , monthly_installment , first_installment, customer_id)VALUES (NULL,355.04,CURRENT_DATE,8) ;
+INSERT INTO loan.installment  (installment_id , monthly_installment , first_installment, customer_id)VALUES (NULL,86.55,CURRENT_DATE,2) ;
+INSERT INTO loan.installment  (installment_id , monthly_installment , first_installment, customer_id)VALUES (NULL,139.98,CURRENT_DATE,1) ;
+INSERT INTO loan.installment  (installment_id , monthly_installment , first_installment, customer_id)VALUES (NULL,404.13,CURRENT_DATE,3) ;
+INSERT INTO loan.installment  (installment_id , monthly_installment , first_installment, customer_id)VALUES (NULL,351.12,CURRENT_DATE,5) ;
+INSERT INTO loan.installment  (installment_id , monthly_installment , first_installment, customer_id)VALUES (NULL,75.33,CURRENT_DATE,6) ;
+
+use loan;
+UPDATE loan.installment  
+SET first_name=(SELECT first_name from customer  where installment.customer_id= customer.customer_id) ;
+
+UPDATE loan.installment   
+SET last_name=(SELECT last_name from customer  where installment.customer_id= customer.customer_id) ;
+
+
+
+

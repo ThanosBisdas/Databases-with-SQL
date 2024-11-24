@@ -1,0 +1,24 @@
+--ερώτημα 1
+use insurance;
+SELECT price, color, year FROM car;
+
+--ερώτημα 2
+use insurance;
+SELECT * FROM car 
+WHERE price>13000;
+
+--ερώτημα 3
+use insurance;
+SELECT SUM(year), AVG(year) FROM car;
+
+--ερώτημα 4
+use insurance;
+SELECT COUNT(price)
+FROM car
+WHERE customer_id=8;
+
+--ερώτημα 5
+use insurance;
+SELECT first_name, last_name, age
+FROM customer
+WHERE first_name LIKE '%os';
